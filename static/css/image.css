@@ -16,8 +16,7 @@ body {
 .s3-input {
   position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .s3-input input {
@@ -40,8 +39,27 @@ body {
 
 .image-section {
   height: 25rem;
-  width: 50rem;
+  width: 100%;
   background-color: red;
   border: 5px solid;
 }
-/*# sourceMappingURL=image.css.map */
+
+.button {
+  position: relative;
+  text-align: center;
+  margin-top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.buttons {
+  border: 1px solid #000000;
+  background: #dddddd;
+}
+
+.image {
+  padding: 1rem;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}

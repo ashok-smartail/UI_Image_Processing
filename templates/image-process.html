@@ -38,26 +38,42 @@
         </div>
         <div class="col-md-9 pad-3 border">
           <div class="row">
-            <div class="image-section">
-              
-            </div>
+              <div class="image">
+                <img id="image" src="/static/s3_downloads/house.jpg" class="img-fluid">
+              </div>
           </div>
           <div class="row">
-            <div class="buttons">
-              <button class="prev"> << </button>
-              <button class="left-rotate">&#8630;</button>
-              <button class="cut">&#9986;</button>
-              <button class="right-rotate">&#8631;</button>
-              <button class="next"> >> </button>
+            <div class="button">
+              <button class="btn btn-lg buttons prev"> << </button>
+              <button id="leftRotate" class="btn btn-lg buttons left-rotate">&#8630;</button>
+              <button class="btn btn-lg buttons cut">&#9986;</button>
+              <button id="rightRotate" class="btn btn-lg buttons right-rotate">&#8631;</button>
+              <button class="btn btn-lg buttons next"> >> </button>
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- Optional JavaScript -->
+    <script type="text/javascript" src="http://jqueryrotate.googlecode.com/svn/trunk/jQueryRotate.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        var angle = 0;
+        $('#rightRotate').on('click', function() {
+            angle += 90;
+            $("#image").rotate(angle);
+        });
+        $('#leftRotate').on('click', function() {
+            angle -= 90;
+            $("#image").rotate(angle);
+        });
+    });
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="/static/js/jquery-3.5.1.slim.min.js"></script>
     <script src="/static/js/popper.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
+
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
   </body>
 </html>
