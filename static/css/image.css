@@ -38,10 +38,9 @@ body {
 }
 
 .image-section {
-  height: 25rem;
-  width: 100%;
-  background-color: red;
-  border: 5px solid;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .button {
@@ -58,9 +57,14 @@ body {
   margin: 0rem 1rem;
 }
 
-.image {
-  padding: 1rem;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+.image-section img {
+  width: 100%;
+}
+
+.file-buttons {
+  background-color: #dddddd;
+  border: none;
+  margin: 5px 0px;
+  border-radius: 10px;
+  padding: 3px 10px;
 }

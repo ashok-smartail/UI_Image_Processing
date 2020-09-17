@@ -11,11 +11,12 @@ class Directory():
 	def __str__(self):
 		return self.dir_name + ' --> ' + str(self.dir_files)
 
-def pass_directory(path, directory):
+def pass_directory(path, directory, all_files):
 	list_ = []
 	for x in os.listdir(path):
 		file = path+'/'+str(x)
 		if os.path.isfile(file):
+			all_files.append(x)
 			list_.append(x)
 		elif os.path.isdir(file):
 			pass_directory(file, list_)
@@ -32,9 +33,10 @@ def index():
 @app.route('/image-process')
 def image():
 	directory = []
-	pass_directory("./static/s3_downloads", directory)
-	
-	return render_template('image-process.html', directory = directory)
+	all_files = []
+	pass_directory("./static/s3_downloads", directory, all_files)
+
+	return render_template('image-process.html', directory = directory, all_files = all_files)
 
 
 if __name__ == '__main__':
