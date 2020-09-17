@@ -45,7 +45,9 @@
             <img src="/static/img/folder.jpg" height="17" width="20">&nbsp;&nbsp; {{ directory[0].dir_name.split('/')[-1]}}
             <div class="files">
               {% for file in directory[0].dir_files %}
-              <div class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I__ &nbsp;{{ file }}</div>
+              <div class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I__ &nbsp;
+                <a href="">{{ file }}</a>
+              </div>
               {% endfor %}
             </div>
           </div>
@@ -69,4 +71,4 @@
     <!-- <script src="/static/js/bootstrap.min.js"></script> -->
 
   </body>
-</html>
+</html> 
