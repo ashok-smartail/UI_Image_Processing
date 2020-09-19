@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 import os
+import cv2
 
 app = Flask(__name__)
 
@@ -53,7 +54,7 @@ def next():
 	except IndexError:
 		imageIndex = 0
 		image = imageList[imageIndex]
-	return render_template('image-process.html', directory = directories, image = image, all_files = imageList)
+	return redirect('image-process')
 	
 @app.route('/previous')
 def previous():
@@ -64,22 +65,34 @@ def previous():
 	except IndexError:
 		imageIndex = len(imageList) - 1
 		image = imageList[imageIndex]
-	return render_template('image-process.html', directory = directories, image = image, all_files = imageList)
-
+	return redirect('image-process')
 
 @app.route('/left_rotate')
 def left_rotate():
-	print('left_rotate')
-	return "left_rotate"
+	base_dir = '/home/ashokubuntu/Desktop/smartailtool/UI_Image_Processing/static/s3_downloads/'
+	image = imageList[imageIndex]
+	complete_path = base_dir + str(image)
+	# print(complete_path)
+	img = cv2.imread(complete_path)
+	# print(img)
+	img = cv2.rotate(img, cv2.ROTATE_90_ANTICLOCKWISE)
+	cv2.imwrite(complete_path, img)
+	return redirect('image-process')
 
 @app.route('/right_rotate')
 def right_rotate():
-	print('right_rotate')
-	return "right_rotate"
+	base_dir = '/home/ashokubuntu/Desktop/smartailtool/UI_Image_Processing/static/s3_downloads/'
+	image = imageList[imageIndex]
+	complete_path = base_dir + str(image)
+	# print(complete_path)
+	img = cv2.imread(complete_path)
+	# print(img)
+	img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+	cv2.imwrite(complete_path, img)
+	return redirect('image-process')
 
-if __name__ == '__main__':
-	
-	imageState , imageIndex , imageList, directory = 0 , 0 , list(), list()
-	print(imageState , imageIndex , imageList, directory)
+if __name__ == '__main__':	
+	imageState , imageIndex , imageList , directory = 0, 0, list(), list()
+	# print(imageState , imageIndex , imageList, directory)
 	numberOfImages = len(imageList)
 	app.run(debug=True)
