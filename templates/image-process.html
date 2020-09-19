@@ -9,6 +9,51 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/image.min.css">
     <title>Image Processing</title>
+<script type="text/javascript">
+
+  function FindPosition(oElement)
+  {
+    if(typeof( oElement.offsetParent ) != "undefined")
+    {
+      for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
+      {
+        posX += oElement.offsetLeft;
+        posY += oElement.offsetTop;
+      }
+        return [ posX, posY ];
+      }
+      else
+      {
+        return [ oElement.x, oElement.y ];
+      }
+  }
+
+  function GetCoordinates(e)
+  {
+    var PosX = 0;
+    var PosY = 0;
+    var ImgPos;
+    ImgPos = FindPosition(myImg);
+    if (!e) var e = window.event;
+    if (e.pageX || e.pageY)
+    {
+      PosX = e.pageX;
+      PosY = e.pageY;
+    }
+    else if (e.clientX || e.clientY)
+      {
+        PosX = e.clientX + document.body.scrollLeft
+          + document.documentElement.scrollLeft;
+        PosY = e.clientY + document.body.scrollTop
+          + document.documentElement.scrollTop;
+      }
+    PosX = PosX - ImgPos[0];
+    PosY = PosY - ImgPos[1];
+    document.getElementById("x").innerHTML = PosX;
+    document.getElementById("y").innerHTML = PosY;
+  }
+
+</script>
   </head>
   <body>
     <div class="container-fluid">
@@ -38,11 +83,11 @@
           </div>
         </div>
         <div class="offset-md-1 col-md-8 pad-3 border">
-          <div class="row">
+          <!-- <div class="row"> -->
             <div class="image-section">
               <img draggable="false" src="/static/s3_downloads/{{ image }}" id="image" />
             </div>
-          </div>
+          <!-- </div> -->
         </div>
       </div>
 
@@ -64,9 +109,15 @@
       </div>
     </div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
+  var myImg = document.getElementById("image");
+  myImg.onmousedown = GetCoordinates;
+</script>
 
-    </script>
+<p>X:<span id="x"></span></p>
+<p>Y:<span id="y"></span></p>
+
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="/static/js/jquery-3.5.1.slim.min.js"></script>
     <script src="/static/js/popper.min.js"></script>
