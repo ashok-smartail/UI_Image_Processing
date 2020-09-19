@@ -75,7 +75,7 @@ def left_rotate():
 	# print(complete_path)
 	img = cv2.imread(complete_path)
 	# print(img)
-	img = cv2.rotate(img, cv2.ROTATE_90_ANTICLOCKWISE)
+	img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
 	cv2.imwrite(complete_path, img)
 	return redirect('image-process')
 
