@@ -93,6 +93,19 @@ def right_rotate():
 	cv2.imwrite(complete_path, img)
 	return redirect('image-process')
 
+@app.route('/crop/<data>')
+def crop(data):
+	base_dir = '/home/ashokubuntu/Desktop/smartailtool/UI_Image_Processing/static/s3_downloads/'
+	x, y, w, h = map(int, data.split(','))
+	image = imageList[imageIndex]
+	complete_path = base_dir + str(image)
+	img = cv2.imread(complete_path)
+	img = img[y:y+h, x:x+w]
+	cv2.imwrite(complete_path, img)
+
+	return redirect(url_for('next'))
+
+
 if __name__ == '__main__':	
 	imageState , imageIndex , imageList , directory = 0, 0, list(), list()
 	# print(imageState , imageIndex , imageList, directory)
