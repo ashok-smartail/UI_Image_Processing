@@ -43,7 +43,9 @@ def image():
 	pass_directory("./static/s3_downloads", directory, all_files)
 	directories = directory[:]
 	imageList = all_files[:]
-	return render_template('image-process.html', directory = directories, image = imageList[imageIndex], all_files = imageList)
+	progress = ((imageIndex + 1)*100) // len(imageList)
+	print(progress, imageIndex+1, len(imageList))
+	return render_template('image-process.html', directory = directories, image = imageList[imageIndex], all_files = imageList, progress = progress)
 
 @app.route('/next')
 def next():
