@@ -3,6 +3,10 @@ import os
 
 app = Flask(__name__)
 
+
+global imageState, imageIndex, imageList, numberOfImages, directory
+
+
 class Directory():
 	def __init__(self, dir_name, dir_files):
 		self.dir_name = dir_name
@@ -32,12 +36,50 @@ def index():
 
 @app.route('/image-process')
 def image():
+	global imageList, directories
 	directory = []
 	all_files = []
 	pass_directory("./static/s3_downloads", directory, all_files)
+	directories = directory[:]
+	imageList = all_files[:]
+	return render_template('image-process.html', directory = directories, image = imageList[imageIndex], all_files = imageList)
 
-	return render_template('image-process.html', directory = directory, all_files = all_files)
+@app.route('/next')
+def next():
+	global imageIndex
+	imageIndex += 1
+	try:
+		image = imageList[imageIndex]
+	except IndexError:
+		imageIndex = 0
+		image = imageList[imageIndex]
+	return render_template('image-process.html', directory = directories, image = image, all_files = imageList)
+	
+@app.route('/previous')
+def previous():
+	global imageIndex
+	imageIndex -= 1
+	try:
+		image = imageList[imageIndex]
+	except IndexError:
+		imageIndex = len(imageList) - 1
+		image = imageList[imageIndex]
+	return render_template('image-process.html', directory = directories, image = image, all_files = imageList)
 
+
+@app.route('/left_rotate')
+def left_rotate():
+	print('left_rotate')
+	return "left_rotate"
+
+@app.route('/right_rotate')
+def right_rotate():
+	print('right_rotate')
+	return "right_rotate"
 
 if __name__ == '__main__':
+	
+	imageState , imageIndex , imageList, directory = 0 , 0 , list(), list()
+	print(imageState , imageIndex , imageList, directory)
+	numberOfImages = len(imageList)
 	app.run(debug=True)

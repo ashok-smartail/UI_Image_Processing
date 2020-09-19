@@ -22,11 +22,11 @@
       </nav>
 
       <div class="progress mt-3">
-        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+        <div class="progress-bar" role="progressbar" style="width: 25%; height:0px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
       </div>
       <div class="row mt-3 pad-3">
-        <div class="col-md-3 pad-3 border">
-          <div class="folder">
+        <div class="col-md-3 pad-3 folder">
+          <div>
             <img src="/static/img/folder.jpg" height="17" width="20">&nbsp;&nbsp; {{ directory[0].dir_name.split('/')[-1]}}
             <div class="files">
               {% for file in all_files %}
@@ -37,25 +37,35 @@
             </div>
           </div>
         </div>
-        <div class="col-md-9 pad-3 border">
+        <div class="offset-md-1 col-md-8 pad-3 border">
           <div class="row">
             <div class="image-section">
-              <img src="/static/s3_downloads/{{ all_files[1] }}" id="image" />
-            </div>
-          </div>
-          <div class="row">
-            <div class="button">
-              <button class="btn btn-lg buttons prev"> << </button>
-              <button id="leftRotate" class="btn btn-lg buttons left-rotate">&#8630;</button>
-              <button id="rightRotate" class="btn btn-lg buttons right-rotate">&#8631;</button>
-              <button class="btn btn-lg buttons next"> >> </button>
+              <img src="/static/s3_downloads/{{ image }}" id="image" />
             </div>
           </div>
         </div>
       </div>
+
+      <div class="process-buttons">
+        <div class="row">
+            <form class="offset-md-4 col-md-2" action="/prev" method="post">
+                <button class="btn btn-warning btn-lg buttons" type="button" onclick="window.location.href='{{ url_for( 'previous') }}';">Previous</button>
+            </form>              
+            <form class="col-md-2" action="/leftRotate" method="post">
+                <button class="btn btn-warning btn-lg buttons" type="button" onclick="window.location.href='{{ url_for( 'left_rotate') }}';">&#8630;</button>
+            </form>              
+            <form class="col-md-2" action="/rightRotate" method="post">
+                <button class="btn btn-warning btn-lg buttons" type="button" onclick="window.location.href='{{ url_for( 'right_rotate') }}';">&#8631;</button>
+            </form>              
+            <form class="col-md-2" action="/next" method="post">
+                <button class="btn btn-warning btn-lg buttons" type="button" onclick="window.location.href='{{ url_for( 'next') }}';">Next</button>
+            </form>
+        </div>
+      </div>
     </div>
+
     <script type="text/javascript">
-      
+
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="/static/js/jquery-3.5.1.slim.min.js"></script>

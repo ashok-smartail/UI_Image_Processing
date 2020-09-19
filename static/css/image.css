@@ -33,10 +33,6 @@ body {
   padding: 1rem;
 }
 
-.border {
-  border: 3px #000000 solid;
-}
-
 .image-section {
   position: relative;
   left: 50%;
@@ -52,9 +48,7 @@ body {
 }
 
 .buttons {
-  border: 1px solid #000000;
-  background: #dddddd;
-  margin: 0rem 1rem;
+  margin: 1rem;
 }
 
 .image-section img {
@@ -67,4 +61,17 @@ body {
   margin: 5px 0px;
   border-radius: 10px;
   padding: 3px 10px;
+}
+
+.folder, .border {
+  border: 3px #dddddd solid !important;
+  border-radius: 5px;
+}
+
+.process-buttons {
+  width: 100%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
 }
