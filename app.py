@@ -4,7 +4,6 @@ import cv2
 
 app = Flask(__name__)
 
-
 global imageState, imageIndex, imageList, numberOfImages, directory
 
 

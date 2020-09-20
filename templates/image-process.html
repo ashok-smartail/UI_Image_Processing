@@ -20,6 +20,7 @@
         <a class="navbar-brand" href="#">
           <img src="{{ url_for('static', filename='img/smartail.png') }}" height="30" alt="smartail">
         </a>
+        <div style="float: right;">{{user}}</div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -49,7 +50,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-8 pad-3 border">
+        <div class="col-md-9 pad-3 border">
             <div class="image-section">
               <img src="/static/s3_downloads/{{ image }}" alt="" id="image">
             </div>
@@ -58,7 +59,7 @@
 
       <div class="process-buttons">
         <div class="row">
-          <div class="offset-md-4 col-md-8">
+          <div class="offset-md-3 col-md-9">
             <div class="row">
               <form class="col-md-3" action="/prev" method="post">
                   <button class="btn btn-warning btn-lg buttons" type="button" onclick="window.location.href='{{ url_for( 'previous') }}';">Previous</button>
@@ -112,7 +113,6 @@
           console.log(datas);
           url = "/crop/".concat(datas)
           window.location.href=url;
-          document.location.reload(true);
         }
 
     </script>
