@@ -1,8 +1,9 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, session
 import os
 import cv2
 
 app = Flask(__name__)
+app.secret_key = "image tool"
 
 global imageState, imageIndex, imageList, numberOfImages, directory
 
@@ -31,6 +32,7 @@ def pass_directory(path, directory, all_files):
 @app.route('/', methods = ['GET', 'POST'])
 def index():
 	if request.method == "POST":
+		session['username'] = 'smartail-ashok'
 		return redirect('image-process')
 	return render_template("index.html")
 
@@ -46,7 +48,7 @@ def image():
 	progress = ((imageIndex + 1)*100) // n
 	print(progress, imageIndex+1, len(imageList))
 	return render_template('image-process.html', directory = directories, image = imageList[imageIndex], 
-		all_files = imageList, progress = progress, i = imageIndex, n = n)
+		all_files = imageList, progress = progress, i = imageIndex, n = n, username = session['username'])
 
 @app.route('/next')
 def next():

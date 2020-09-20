@@ -42,7 +42,7 @@ body {
 }
 
 .buttons {
-  margin: 1rem;
+  margin: 1rem 0rem;
 }
 
 .file-buttons {
@@ -56,6 +56,11 @@ body {
 .folder, .border {
   border: 3px #dddddd solid !important;
   border-radius: 5px;
+}
+
+.folder, .border {
+  max-height: 28rem;
+  overflow: scroll;
 }
 
 .process-buttons {

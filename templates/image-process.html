@@ -20,7 +20,7 @@
         <a class="navbar-brand" href="#">
           <img src="{{ url_for('static', filename='img/smartail.png') }}" height="30" alt="smartail">
         </a>
-        <div style="float: right;">{{user}}</div>
+        <div class="h4 ml-auto" style="margin-right: 3rem">{{username}}</div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -37,8 +37,8 @@
         </div>
       </div>
 
-      <div class="row mt-3 pad-3">
-        <div class="col-md-3 pad-3 folder">
+      <div class="row">
+        <div class="col-md-2 pad-3 folder">
           <div>
             <img src="/static/img/folder.jpg" height="17" width="20">&nbsp;&nbsp; {{ directory[0].dir_name.split('/')[-1]}}
             <div class="files">
@@ -50,7 +50,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-9 pad-3 border">
+        <div class="col-md-10 pad-3 border">
             <div class="image-section">
               <img src="/static/s3_downloads/{{ image }}" alt="" id="image">
             </div>
