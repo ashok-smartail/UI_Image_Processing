@@ -20,21 +20,21 @@
         <a class="navbar-brand" href="#">
           <img src="{{ url_for('static', filename='img/smartail.png') }}" height="30" alt="smartail">
         </a>
-        <div class="h4 ml-auto" style="margin-right: 3rem">{{username}}</div>
+        <div class="h6 ml-auto" style="margin-right: 3rem">{{username}}</div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
       </nav>
 
-      <div class="row mt-3">
-        <div class="col-md-8">
+      <div class="row mt-3 mb-3">
+        <div class="col-md-12">
           <div class="progress">
             <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{progress}}%;" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100">{{progress}}%</div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="h2" style="float: right;">{{i+1}} / {{n}}</div>
-        </div>
+<!--         <div class="col-md-3">
+          <div class="h6" style="float: right;">{{i+1}} / {{n}}</div>
+        </div> -->
       </div>
 
       <div class="row">
@@ -43,8 +43,8 @@
             <img src="/static/img/folder.jpg" height="17" width="20">&nbsp;&nbsp; {{ directory[0].dir_name.split('/')[-1]}}
             <div class="files">
               {% for file in all_files %}
-              <div class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="file-buttons" onclick="document.getElementById('image').src='/static/s3_downloads/{{file}}'">{{ file }}</button>
+              <div class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I___
+                <button class="file-buttons" id="{{file}}" onclick="document.getElementById('image').src='/static/s3_downloads/{{file}}'">{{ file }}</button>
               </div>
               {% endfor %}
             </div>
@@ -59,25 +59,21 @@
 
       <div class="process-buttons">
         <div class="row">
-          <div class="offset-md-3 col-md-9">
-            <div class="row">
-              <form class="col-md-3" action="/prev" method="post">
-                  <button class="btn btn-warning btn-lg buttons" type="button" onclick="window.location.href='{{ url_for( 'previous') }}';">Previous</button>
-              </form>              
-              <form class="col-md-2" action="/leftRotate" method="post">
-                  <button class="btn btn-warning btn-lg buttons" type="button" onclick="window.location.href='{{ url_for( 'left_rotate') }}';">&#8630;</button>
-              </form>
-              <form class="col-md-2" action="/crop" method="post">
-                  <button class="btn btn-warning btn-lg buttons" type="button" onclick="crop()">crop</button>
-              </form>              
-              <form class="col-md-2" action="/rightRotate" method="post">
-                  <button class="btn btn-warning btn-lg buttons" type="button" onclick="window.location.href='{{ url_for( 'right_rotate') }}';">&#8631;</button>
-              </form>              
-              <form class="col-md-3" action="/next" method="post">
-                  <button class="btn btn-warning btn-lg buttons" type="button" onclick="window.location.href='{{ url_for( 'next') }}';">Next</button>
-              </form>
-            </div>
-          </div>
+          <form class="offset-md-2 col-md-2" action="/prev" method="post">
+              <button class="btn btn-lg buttons" type="button" onclick="window.location.href='{{ url_for( 'previous') }}';">Previous</button>
+          </form>              
+          <form class="col-md-2" action="/leftRotate" method="post">
+              <button class="btn btn-lg buttons" type="button" onclick="window.location.href='{{ url_for( 'left_rotate') }}';">&#8630;</button>
+          </form>
+          <form class="col-md-2" action="/crop" method="post">
+              <button class="btn btn-lg buttons" type="button" onclick="crop()">Crop</button>
+          </form>              
+          <form class="col-md-2" action="/rightRotate" method="post">
+              <button class="btn btn-lg buttons" type="button" onclick="window.location.href='{{ url_for( 'right_rotate') }}';">&#8631;</button>
+          </form>              
+          <form class="col-md-2" action="/next" method="post">
+              <button class="btn btn-lg buttons" type="button" onclick="window.location.href='{{ url_for( 'next') }}';">Next</button>
+          </form>
         </div>
       </div>
     </div>
@@ -85,31 +81,23 @@
 
 
     <script>
-        var imageCropWidth = 0;
-        var imageCropHeight = 0;
-        var cropPointX = 0;
-        var cropPointY = 0;
+        var datas = "";
 
         $(document).ready(function(){
             $('#image').Jcrop({
-                onSelect: function(c){
-
-                    console.log(c);
-
-                    imageCropWidth = c.w.toString();
-                    imageCropHeight = c.h.toString();
-                    cropPointX = c.x.toString();
-                    cropPointY = c.y.toString();
-
-                    console.log(imageCropWidth);
-
+                onSelect: function(crop){
+                  c = ""
+                  c = c.concat(crop.x.toString(), "-", crop.y.toString(), "-", crop.w.toString(), "-", crop.h.toString())
+                  datas = datas.concat(c, "+");
+                  console.log(datas);
                 }
             });
         });
 
+        document.getElementById("{{image}}").style.backgroundColor="#dddddd"
+
         function crop() {
-          var datas, url;
-          datas = cropPointX.concat(',', cropPointY, ',', imageCropWidth, ',', imageCropHeight);
+          var url;
           console.log(datas);
           url = "/crop/".concat(datas)
           window.location.href=url;
