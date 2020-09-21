@@ -31,6 +31,11 @@ nav .h6 {
   width: 80vw;
   margin: 0rem 7rem;
   padding: 1rem;
+  border-radius: 0.3rem;
+}
+
+input {
+  border: 2px solid #555555;
 }
 
 .s3-input {
@@ -96,4 +101,12 @@ nav .h6 {
 
 .buttons {
   width: 65%;
+}
+
+#child1, #child2, #child3, #child4, #child5, #child6, #child7, #child8, #child9, #child10 {
+  position: absolute;
+}
+
+#child11, #child12, #child13, #child14, #child15, #child16, #child17, #child18, #child19, #child20 {
+  position: absolute;
 }

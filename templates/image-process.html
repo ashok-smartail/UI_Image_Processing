@@ -13,8 +13,10 @@
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/jquery.Jcrop.js"></script>
 
+
   </head>
   <body>
+
     <div class="container-fluid">
       <nav class="navbar navbar-expand-lg navbar-bg">
         <a class="navbar-brand" href="#">
@@ -37,6 +39,8 @@
         </div> -->
       </div>
 
+<!-- <div id="myDiv"></div> -->
+
       <div class="row">
         <div class="col-md-2 pad-3 folder">
           <div>
@@ -53,6 +57,26 @@
         <div class="col-md-10 pad-3 border">
             <div class="image-section">
               <img src="/static/s3_downloads/{{ image }}" alt="" id="image">
+              <div id="child1"></div>
+              <div id="child2"></div>
+              <div id="child3"></div>
+              <div id="child4"></div>
+              <div id="child5"></div>
+              <div id="child6"></div>
+              <div id="child7"></div>
+              <div id="child8"></div>
+              <div id="child9"></div>
+              <div id="child10"></div>
+              <div id="child11"></div>
+              <div id="child12"></div>
+              <div id="child13"></div>
+              <div id="child14"></div>
+              <div id="child15"></div>
+              <div id="child16"></div>
+              <div id="child17"></div>
+              <div id="child18"></div>
+              <div id="child19"></div>
+              <div id="child20"></div>
             </div>
         </div>
       </div>
@@ -82,32 +106,65 @@
 
     <script>
         var datas = "";
+        var i;
+        
+        var dataArray = [];
+        function addRectangle(x, y, w, h, rect) {
+            // console.log(x, y, w, h);
+            x = x + 16;
+            y = y + 16;
+            var rectangle = ""
+            rectangle = rectangle.concat("child", rect.toString());
+            // console.log(rectangle);
+            document.getElementById(rectangle).style.left = x.toString() + "px";
+            document.getElementById(rectangle).style.top = y.toString() + "px";
+            document.getElementById(rectangle).style.width = w.toString() + "px";
+            document.getElementById(rectangle).style.height = h.toString() + "px";
+            document.getElementById(rectangle).style.zIndex = "5";
+            document.getElementById(rectangle).style.border = "2px solid green";
+            // console.log("Done")
+        }
 
         $(document).ready(function(){
             $('#image').Jcrop({
                 onSelect: function(crop){
-                  c = ""
+                  c = "";
                   c = c.concat(crop.x.toString(), "-", crop.y.toString(), "-", crop.w.toString(), "-", crop.h.toString())
                   datas = datas.concat(c, "+");
-                  console.log(datas);
+                  // console.log(datas);
+                  dataArray.push(crop);
+
+                  drawRectangles();
                 }
             });
         });
+
+        function drawRectangles() {
+          var i;
+          // console.log(dataArray.length);
+
+          for ( i=0; i < dataArray.length; i++ ) {   
+            // console.log(dataArr)
+              addRectangle(dataArray[i].x, dataArray[i].y, dataArray[i].w, dataArray[i].h, i+1);
+          }
+        }
 
         document.getElementById("{{image}}").style.backgroundColor="#dddddd"
 
         function crop() {
           var url;
-          console.log(datas);
+          // console.log(datas);
           url = "/crop/".concat(datas)
           window.location.href=url;
         }
 
     </script>
+
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- <script src="/static/js/jquery-3.5.1.slim.min.js"></script> -->
     <script src="/static/js/popper.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
 
   </body>
-</html> 
+</html>

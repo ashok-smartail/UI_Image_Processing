@@ -121,6 +121,6 @@ if __name__ == '__main__':
 	# print(imageState , imageIndex , imageList, directory)
 	numberOfImages = len(imageList)
 	out_name_array = np.random.random_integers(low = 1, high = 10000000000, size = 1000000)
-	print(out_name_array)
+	# print(out_name_array)
 	out_name_index = 0
 	app.run(debug=True)
