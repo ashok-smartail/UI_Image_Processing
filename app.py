@@ -6,7 +6,7 @@ import numpy as np
 app = Flask(__name__)
 app.secret_key = "image tool"
 
-global imageState, imageIndex, imageList, numberOfImages, directory, out_name_array, out_name_index
+global imageState, imageIndex, imageList, numberOfImages, directory, out_name_array, out_name_index, base_dir
 
 
 class Directory():
@@ -123,4 +123,5 @@ if __name__ == '__main__':
 	out_name_array = np.random.random_integers(low = 1, high = 10000000000, size = 1000000)
 	# print(out_name_array)
 	out_name_index = 0
+	base_dir = os.path.abspath('.')
 	app.run(debug=True)
